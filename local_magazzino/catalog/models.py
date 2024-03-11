@@ -13,12 +13,17 @@ from django.db import models
 
 class Materiale(models.Model):
 	"""Modello rappresentante un materiale presente in magazzino"""
-	descrizione = models.CharField(max_length=200)
-	unita_misura = models.CharField(max_length=2)
-	sottoscorta = models.IntegerField()
+	descrizione = models.CharField(max_length=50)
+	unita_misura = models.CharField(max_length=5)
+	sottoscorta = models.IntegerField(max_length=3)
 
 	def __str__(self):
 		return self.descrizione
+
+	def id_materiale(self):
+		"""Create a string for the id. This is required to display id in Admin."""
+		return self
+
 
 
 # def get_absolute_url(self):
@@ -30,10 +35,10 @@ class Movimenti(models.Model):
 	materiale = models.ForeignKey("Materiale", on_delete=models.RESTRICT, null=True)
 	quantita = models.IntegerField()
 	magazzino = models.CharField(max_length=3)
-	# data_movimento = models.DateTimeField()
+	data_movimento = models.DateTimeField(null=True)
 
 	def __str__(self):
-		return self.magazzino
+		return f"{str(self.materiale)} {str(self.quantita)} {str(self.magazzino)}"
 
 
 # class Genre(models.Model):
