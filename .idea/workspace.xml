@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="23fb5fd9-509f-423c-a91f-dff029c1fe50" name="Changes" comment="skeleton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +22,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Luigita&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="a813ac0b-c257-496f-9282-a4c2ed5ba866" />
+        <option name="url" value="https://github.com/Luigita/progetto_magazzino.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -104,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709919154265</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="skeleton">
+      <option name="closed" value="true" />
+      <created>1710178511334</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710178511334</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

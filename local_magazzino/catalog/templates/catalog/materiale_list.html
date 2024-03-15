@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Lista Materiali</h1>
+  {% if materiale_list %}
+    <ul>
+      {% for materiale in materiale_list %}
+      <li>
+        <a href="{{ materiale.get_absolute_url }}">{{ materiale.descrizione }}</a>
+        ({{materiale.unita_misura}})
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Non ci sono materiali registrati.</p>
+  {% endif %}
+{% endblock %}

@@ -11,6 +11,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Materiale(models.Model):
 	"""Modello rappresentante un materiale presente in magazzino"""
 	descrizione = models.CharField(max_length=50)
@@ -20,14 +21,13 @@ class Materiale(models.Model):
 	def __str__(self):
 		return self.descrizione
 
+	def get_absolute_url(self):
+		return reverse("materiale_list", args=[str(self.id)])
+
 	def id_materiale(self):
 		"""Create a string for the id. This is required to display id in Admin."""
 		return self
 
-
-
-# def get_absolute_url(self):
-# 	return reverse()
 
 
 class Movimenti(models.Model):
@@ -37,9 +37,11 @@ class Movimenti(models.Model):
 	magazzino = models.CharField(max_length=3)
 	data_movimento = models.DateTimeField(null=True)
 
+	def get_absolute_url(self):
+		return reverse("movimenti-view", args=[str(self.id)])
+
 	def __str__(self):
 		return f"{str(self.materiale)} {str(self.quantita)} {str(self.magazzino)}"
-
 
 # class Genre(models.Model):
 # 	"""Model representing a book genre."""
