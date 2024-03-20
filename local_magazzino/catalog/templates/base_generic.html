@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     {% block title %}
-      <title>Local Library</title>
+      <!-- TODO: NOME DELLA SCHEDA DEL BROWSER -->
+      <title>Nome del magazzino</title>
     {% endblock %}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,8 +22,8 @@
           {% block sidebar %}
             <ul class="sidebar-nav">
               <li><a href="{% url 'index' %}">Home</a></li>
-              <li><a href="">Tutti i Materiali</a></li>
-              <li><a href="">Tutti i Movimenti</a></li>
+              <li><a href="{% url 'materiali' %}">Tutti i Materiali</a></li>
+              <li><a href="{% url 'movimenti' %}">Tutti i Movimenti</a></li>
             </ul>
           {% endblock %}
         </div>

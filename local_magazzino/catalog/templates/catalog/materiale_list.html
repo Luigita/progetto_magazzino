@@ -7,7 +7,9 @@
       {% for materiale in materiale_list %}
       <li>
         <a href="{{ materiale.get_absolute_url }}">{{ materiale.descrizione }}</a>
-        ({{materiale.unita_misura}})
+<!--       TODO: materiale.fai la somma dei movimenti del materiale per vedere quanti pezzi sono disponibili-->
+        numeri
+        {{materiale.unita_misura}}
       </li>
       {% endfor %}
     </ul>

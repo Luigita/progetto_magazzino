@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23fb5fd9-509f-423c-a91f-dff029c1fe50" name="Changes" comment="skeleton">
+    <list default="true" id="23fb5fd9-509f-423c-a91f-dff029c1fe50" name="Changes" comment="adding stufs">
+      <change afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/movimenti_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/movimento_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/static/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/base_generic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -37,6 +47,12 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -46,16 +62,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.manage.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore_missing_gitignore": "true",
+    "last_opened_file_path": "C:/Users/ltanzillo/PycharmProjects/magazzino/local_magazzino/catalog/templates/catalog",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ltanzillo\PycharmProjects\magazzino\local_magazzino\catalog\templates\catalog" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ltanzillo\PycharmProjects\magazzino\local_magazzino\catalog\static\css" />
+      <recent name="C:\Users\ltanzillo\PycharmProjects\magazzino\local_magazzino\catalog\templates\catalog" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="manage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="magazzino" />
@@ -125,12 +153,21 @@
       <option name="project" value="LOCAL" />
       <updated>1710178511334</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding stufs">
+      <option name="closed" value="true" />
+      <created>1710523688143</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710523688143</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="skeleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="skeleton" />
+    <MESSAGE value="adding stufs" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding stufs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

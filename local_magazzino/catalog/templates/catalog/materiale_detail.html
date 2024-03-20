@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Visualizzazione materiale</h1>
+    <ul>
+      <body>
+        {{materiale_detail.descrizione}}
+        unità di misura: {{materiale_detail.unita_misura}}
+        sottoscorta: {{materiale_detail.sottoscorta}}
+
+      </body>
+    </ul>
+{% endblock %}

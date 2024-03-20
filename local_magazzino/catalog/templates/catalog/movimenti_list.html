@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Lista Movimenti</h1>
+  {% if movimenti_list %}
+    <ul>
+      {% for movimenti in movimenti_list %}
+      <li>
+        <a href="{{ movimenti.get_absolute_url }}">{{ movimenti.materiale.descrizione }}</a>
+        ({{movimenti.quantita}})
+        ({{movimenti.magazzino}})
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Non ci sono Movimenti registrati.</p>
+  {% endif %}
+{% endblock %}

@@ -7,38 +7,49 @@ from django.db.models.functions import Lower  # Returns lower cased value of fie
 
 import uuid  # Required for unique book instances
 from django.db import models
-
-
-# Create your models here.
+from django.utils import timezone
 
 
 class Materiale(models.Model):
 	"""Modello rappresentante un materiale presente in magazzino"""
-	descrizione = models.CharField(max_length=50)
-	unita_misura = models.CharField(max_length=5)
+	descrizione = models.CharField(max_length=50, null=False, blank=False, unique=True)
+	unita_misura = models.CharField(max_length=5, null=False, blank=False)
 	sottoscorta = models.IntegerField(max_length=3)
+
+	class Meta:
+		verbose_name = "Materiale"
+		verbose_name_plural = "Materiali"
 
 	def __str__(self):
 		return self.descrizione
 
 	def get_absolute_url(self):
-		return reverse("materiale_list", args=[str(self.id)])
+		return reverse("materiale_view", args=[str(self.pk)])
 
 	def id_materiale(self):
 		"""Create a string for the id. This is required to display id in Admin."""
-		return self
-
+		return self.id
 
 
 class Movimenti(models.Model):
 	"""Modello rappresentante la movimentazione di un materiale"""
-	materiale = models.ForeignKey("Materiale", on_delete=models.RESTRICT, null=True)
-	quantita = models.IntegerField()
-	magazzino = models.CharField(max_length=3)
-	data_movimento = models.DateTimeField(null=True)
+	materiale = models.ForeignKey("Materiale", on_delete=models.RESTRICT, null=True, related_name="movimenti")
+	quantita = models.IntegerField(blank=False)
+
+	magazzino_choices = [
+		("NAP", "Napoli"),
+		("MIL", "Milano"),
+	]
+	magazzino = models.CharField(max_length=3, choices=magazzino_choices)
+
+	data_movimento = models.DateTimeField(auto_now_add=True)
+
+	class Meta:
+		verbose_name = "Movimento"
+		verbose_name_plural = "Movimenti"
 
 	def get_absolute_url(self):
-		return reverse("movimenti-view", args=[str(self.id)])
+		return reverse("movimento_view", args=[str(self.pk)])
 
 	def __str__(self):
 		return f"{str(self.materiale)} {str(self.quantita)} {str(self.magazzino)}"
@@ -145,3 +156,39 @@ class Movimenti(models.Model):
 # 	def __str__(self):
 # 		"""String for representing the Model object."""
 # 		return f'{self.last_name}, {self.first_name}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
