@@ -4,6 +4,10 @@
   list-style: none;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+#logout-form {
+  display: inline;
+}
+#logout-form button {
+  padding: 0;
+  margin: 0;
+}

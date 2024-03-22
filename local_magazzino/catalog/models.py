@@ -9,16 +9,22 @@ import uuid  # Required for unique book instances
 from django.db import models
 from django.utils import timezone
 
+from django.conf import settings
+
+from django.contrib.auth.models import User
+
 
 class Materiale(models.Model):
 	"""Modello rappresentante un materiale presente in magazzino"""
 	descrizione = models.CharField(max_length=50, null=False, blank=False, unique=True)
 	unita_misura = models.CharField(max_length=5, null=False, blank=False)
 	sottoscorta = models.IntegerField(max_length=3)
+	creatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
 	class Meta:
 		verbose_name = "Materiale"
 		verbose_name_plural = "Materiali"
+
 
 	def __str__(self):
 		return self.descrizione
@@ -35,6 +41,7 @@ class Movimenti(models.Model):
 	"""Modello rappresentante la movimentazione di un materiale"""
 	materiale = models.ForeignKey("Materiale", on_delete=models.RESTRICT, null=True, related_name="movimenti")
 	quantita = models.IntegerField(blank=False)
+	creatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
 	magazzino_choices = [
 		("NAP", "Napoli"),
@@ -156,39 +163,3 @@ class Movimenti(models.Model):
 # 	def __str__(self):
 # 		"""String for representing the Model object."""
 # 		return f'{self.last_name}, {self.first_name}'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

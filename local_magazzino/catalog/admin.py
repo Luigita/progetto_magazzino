@@ -3,27 +3,13 @@ from django.contrib import admin
 from .models import Materiale, Movimenti
 
 
-# admin.site.register(Materiale)
-# admin.site.register(Movimenti)
-
 # Define the admin class
+@admin.register(Materiale)
 class MaterialeAdmin(admin.ModelAdmin):
-	list_display = ("descrizione", "unita_misura", "sottoscorta")
+	list_display = ("descrizione", "unita_misura", "sottoscorta", "creatore")
 
 
-# Register the admin class with the associated model
-admin.site.register(Materiale, MaterialeAdmin)
-
-
+@admin.register(Movimenti)
 class MovimentiAdmin(admin.ModelAdmin):
-	list_display = ("data_movimento", "materiale", "quantita", "magazzino")
+	list_display = ("data_movimento", "materiale", "quantita", "magazzino", "creatore")
 
-
-admin.site.register(Movimenti, MovimentiAdmin)
-
-# from .models import Author, Genre, Book, BookInstance
-# # Register your models here.
-# admin.site.register(Book)
-# admin.site.register(Author)
-# admin.site.register(Genre)
-# admin.site.register(BookInstance)
