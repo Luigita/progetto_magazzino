@@ -1,3 +1,6 @@
+
+
+
 {% extends "base_generic.html" %}
 
 {% block content %}
@@ -6,8 +9,9 @@
     <ul>
       {% for materiale in materiale_list %}
       <li>
+        {{materiale.pk}}
         <a href="{{ materiale.get_absolute_url }}">{{ materiale.descrizione }}</a>
-<!--       TODO: materiale.fai la somma dei movimenti del materiale per vedere quanti pezzi sono disponibili-->
+<!--       TODO: materiale. fai la somma dei movimenti del materiale per vedere quanti pezzi sono disponibili-->
         numeri
         {{materiale.unita_misura}}
       </li>

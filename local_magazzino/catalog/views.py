@@ -21,6 +21,7 @@ class MaterialiView(LoginRequiredMixin, generic.ListView):
 class ModificaMaterialeView(LoginRequiredMixin, generic.ListView):
 	model = Materiale
 	context_object_name = 'lista_modifica_materiale'
+	template_name = "catalog/lista_modifica_materiale.html"
 
 
 class MaterialeDetail(generic.DetailView):
@@ -67,10 +68,12 @@ def modifica_materiale(request, pk):
 		form = ModificaMaterialeForm(request.POST)
 
 		if form.is_valid():
-			instance.unita_misura = form.cleaned_data["unita_misura"]
+			instance.descrizione = form.clean_descrizione()
+			instance.unita_misura = form.clean_unita_misura()
+			instance.sottoscorta = form.clean_sottoscorta()
 			instance.save()
 
-			# TODO: DA AGGIUNGERE QUALCISA IN REVERSE
+			# TODO: DA AGGIUNGERE QUALCOSA IN REVERSE, al momento ritorna la pagina web relativa alla lista dei materiali
 			return HttpResponseRedirect(reverse("materiali"))
 	else:
 		proposed_unita_misura = instance.unita_misura

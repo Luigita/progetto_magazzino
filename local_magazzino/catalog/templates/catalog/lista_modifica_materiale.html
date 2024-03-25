@@ -4,13 +4,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Lista Materiali</h1>
-  {% if materiale_list %}
+  <h1>Modifica Materiali</h1>
+  {% if lista_modifica_materiale %}
     <ul>
-      {% for materiale in materiale_list %}
+      {% for materiale in lista_modifica_materiale %}
       <li>
-        <a href="{{ {% url 'modifica_materiale'/materiale.get_absolute_urls %} }}">{{ materiale.descrizione }}</a>
-<!--       TODO: materiale.fai la somma dei movimenti del materiale per vedere quanti pezzi sono disponibili-->
+        <a href="modifica_materiale/{{ materiale.pk }}">{{ materiale.descrizione }}</a>
+<!--       TODO: materiale. fai la somma dei movimenti del materiale per vedere quanti pezzi sono disponibili-->
         numeri
         {{materiale.unita_misura}}
       </li>
