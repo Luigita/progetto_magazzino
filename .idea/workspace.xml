@@ -4,15 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23fb5fd9-509f-423c-a91f-dff029c1fe50" name="Changes" comment="adding MORE views and urls for single elements&#10;ADDED FORMS">
+    <list default="true" id="23fb5fd9-509f-423c-a91f-dff029c1fe50" name="Changes" comment="aggiunta la possibilita di modificare un materiale, con il controllo sui campi del form di modifica">
+      <change afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/aggiungi_materiale.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local_magazzino/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/lista_modifica_materiale.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/lista_modifica_materiale.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/modifica_materiale.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/modifica_materiale.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/base_generic.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/local_magazzino/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/local_magazzino/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +31,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="deployment" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -68,7 +76,8 @@
     "Python.manage.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "git-widget-placeholder": "deployment",
     "ignore_missing_gitignore": "true",
     "last_opened_file_path": "C:/Users/ltanzillo/PycharmProjects/magazzino/local_magazzino/catalog/templates/catalog",
     "run.code.analysis.last.selected.profile": "pProject Default",
@@ -177,14 +186,34 @@
       <option name="project" value="LOCAL" />
       <updated>1711128776694</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="aggiunta la possibilita di modificare un materiale, con il controllo sui campi del form di modifica">
+      <option name="closed" value="true" />
+      <created>1711387646539</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711387646539</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="skeleton" />
     <MESSAGE value="adding stufs" />
     <MESSAGE value="adding views and urls for single elements" />
     <MESSAGE value="adding MORE views and urls for single elements&#10;ADDED FORMS" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding MORE views and urls for single elements&#10;ADDED FORMS" />
+    <MESSAGE value="aggiunta la possibilita di modificare un materiale, con il controllo sui campi del form di modifica" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunta la possibilita di modificare un materiale, con il controllo sui campi del form di modifica" />
   </component>
 </project>

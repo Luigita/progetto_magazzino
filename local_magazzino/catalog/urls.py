@@ -9,4 +9,6 @@ urlpatterns = [
 	path('movimento_detail/<int:pk>', views.MovimentoDetail.as_view(), name='movimento_view'),
 	path('lista_modifica_materiale/modifica_materiale/<int:pk>/', views.modifica_materiale, name='modifica_materiale'),
 	path('lista_modifica_materiale/', views.ModificaMaterialeView.as_view(), name='lista_modifica_materiale'),
+
+	path('aggiungi_materiale/', views.aggiungi_materiale, name='aggiungi_materiale'),
 ]

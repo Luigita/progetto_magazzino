@@ -76,8 +76,16 @@ def modifica_materiale(request, pk):
 			# TODO: DA AGGIUNGERE QUALCOSA IN REVERSE, al momento ritorna la pagina web relativa alla lista dei materiali
 			return HttpResponseRedirect(reverse("materiali"))
 	else:
+		proposed_descrizione = instance.descrizione
 		proposed_unita_misura = instance.unita_misura
-		form = ModificaMaterialeForm(initial={"unita_misura": proposed_unita_misura})
+		proposed_sottoscorta = instance.sottoscorta
+
+		form = ModificaMaterialeForm(
+			initial={
+				"unita_misura": proposed_unita_misura,
+				"descrizione": proposed_descrizione,
+				"sottoscorta": proposed_sottoscorta
+			})
 
 	context = {
 		"form": form,
@@ -85,6 +93,34 @@ def modifica_materiale(request, pk):
 	}
 
 	return render(request, "catalog/modifica_materiale.html", context)
+
+
+def aggiungi_materiale(request):
+	if request.method == "POST":
+
+		form = ModificaMaterialeForm(request.POST)
+
+		if form.is_valid():
+			# descrizione = request.POST['descrizione']
+			# unita_misura = request.POST['unita_misura']
+			# sottoscorta = request.POST['sottoscorta']
+			descrizione = form.clean_descrizione()
+			unita_misura = form.clean_unita_misura()
+			sottoscorta = form.clean_sottoscorta()
+
+			nuovo_materiale = Materiale(descrizione=descrizione, unita_misura=unita_misura, sottoscorta=sottoscorta)
+			nuovo_materiale.save()
+			return HttpResponseRedirect(reverse('materiali'))
+
+	else:
+
+		form = ModificaMaterialeForm()
+
+	context = {
+		"form": form,
+	}
+
+	return render(request, "catalog/aggiungi_materiale.html", context)
 
 #
 # def materiali(request):
