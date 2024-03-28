@@ -27,6 +27,7 @@
               {% if user.is_authenticated %}
                  <li>Utente: {{ user.get_username }}</li>
 <!--               AGGIUNGERE TUTTE LE FUNZIONI CHE POTRA FARE L'UTENTE-->
+                 <li><a href="{% url 'aggiungi_materiale' %}">Aggiungi Materiale</a></li>
                  <li><a href="{% url 'lista_modifica_materiale' %}">Modifica Materiale</a></li>
                  <li>
                    <form id="logout-form" method="post" action="{% url 'logout' %}">

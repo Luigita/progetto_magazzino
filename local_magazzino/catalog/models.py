@@ -18,7 +18,7 @@ class Materiale(models.Model):
 	"""Modello rappresentante un materiale presente in magazzino"""
 	descrizione = models.CharField(max_length=50, null=False, blank=False, unique=True)
 	unita_misura = models.CharField(max_length=5, null=False, blank=False)
-	sottoscorta = models.IntegerField(max_length=3)
+	sottoscorta = models.IntegerField()
 	creatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
 	class Meta:
