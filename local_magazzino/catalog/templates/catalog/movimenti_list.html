@@ -6,7 +6,8 @@
     <ul>
       {% for movimenti in movimenti_list %}
       <li>
-        <a href="{{ movimenti.get_absolute_url }}">{{ movimenti.materiale.descrizione }}</a>
+        <a href="{{ movimenti.get_absolute_url }}">{{ movimenti.materiale.codice }}</a>
+        "{{ movimenti.materiale.descrizione }}"
         ({{movimenti.quantita}})
         ({{movimenti.magazzino}})
       </li>

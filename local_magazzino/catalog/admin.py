@@ -6,7 +6,7 @@ from .models import Materiale, Movimenti
 # Define the admin class
 @admin.register(Materiale)
 class MaterialeAdmin(admin.ModelAdmin):
-	list_display = ("descrizione", "unita_misura", "sottoscorta", "creatore")
+	list_display = ("codice", "descrizione", "unita_misura", "sottoscorta", "giacenza", "creatore")
 
 
 @admin.register(Movimenti)

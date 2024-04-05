@@ -16,15 +16,17 @@ from django.contrib.auth.models import User
 
 class Materiale(models.Model):
 	"""Modello rappresentante un materiale presente in magazzino"""
-	descrizione = models.CharField(max_length=50, null=False, blank=False, unique=True)
-	unita_misura = models.CharField(max_length=5, null=False, blank=False)
+	codice = models.CharField(max_length=50, null=True, blank=False, unique=True)
+	descrizione = models.CharField(max_length=50, null=False, blank=False)
+	unita_misura = models.CharField(max_length=5, null=False, blank=False, default="PZ")
 	sottoscorta = models.IntegerField()
 	creatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+
+	giacenza = models.IntegerField(default=0)
 
 	class Meta:
 		verbose_name = "Materiale"
 		verbose_name_plural = "Materiali"
-
 
 	def __str__(self):
 		return self.descrizione
@@ -40,7 +42,9 @@ class Materiale(models.Model):
 class Movimenti(models.Model):
 	"""Modello rappresentante la movimentazione di un materiale"""
 	materiale = models.ForeignKey("Materiale", on_delete=models.RESTRICT, null=True, related_name="movimenti")
-	quantita = models.IntegerField(blank=False)
+	quantita = models.IntegerField(blank=False, null=False)
+
+	# TODO: METTERE UTENTE LOGGATO COME PREDEFINITO
 	creatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
 	magazzino_choices = [
@@ -49,7 +53,7 @@ class Movimenti(models.Model):
 	]
 	magazzino = models.CharField(max_length=3, choices=magazzino_choices)
 
-	data_movimento = models.DateTimeField(auto_now_add=True)
+	data_movimento = models.DateTimeField(unique=True, auto_now_add=True)
 
 	class Meta:
 		verbose_name = "Movimento"
