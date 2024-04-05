@@ -1,6 +1,3 @@
-
-
-
 {% extends "base_generic.html" %}
 
 {% block content %}
@@ -9,11 +6,9 @@
     <ul>
       {% for materiale in materiale_list %}
       <li>
-        {{materiale.pk}}
-        <a href="{{ materiale.get_absolute_url }}">{{ materiale.descrizione }}</a>
-<!--       TODO: materiale. fai la somma dei movimenti del materiale per vedere quanti pezzi sono disponibili-->
-        numeri
-        {{materiale.unita_misura}}
+        <pre><a href="{{ materiale.get_absolute_url }}">{{ materiale.codice }}</a> "{{materiale.descrizione}}" Sottoscorta: {{materiale.sottoscorta}}
+          {% if materiale.giacenza >= materiale.sottoscorta %}<b style="background-color: LightGreen;">{{materiale.giacenza}} {{materiale.unita_misura}}</b>{% else %}<b style="background-color: red;">{{materiale.giacenza}} {{materiale.unita_misura}}</b>{% endif %}
+        </pre>
       </li>
       {% endfor %}
     </ul>

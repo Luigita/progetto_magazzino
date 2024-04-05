@@ -1,4 +1,5 @@
 .env
+local_magazzino/local_magazzino/settings.py
 
 ### Django template
 *.log

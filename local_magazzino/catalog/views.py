@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
-from .forms import ModificaMaterialeForm
+from .forms import MaterialeForm, CaricoForm, ModificaMaterialeForm
 
 # Create your views here.
 
@@ -68,21 +68,22 @@ def modifica_materiale(request, pk):
 		form = ModificaMaterialeForm(request.POST)
 
 		if form.is_valid():
-			instance.descrizione = form.clean_descrizione()
-			instance.unita_misura = form.clean_unita_misura()
+			# instance.unita_misura = form.clean_unita_misura()
 			instance.sottoscorta = form.clean_sottoscorta()
 			instance.save()
 
-			# TODO: DA AGGIUNGERE QUALCOSA IN REVERSE, al momento ritorna la pagina web relativa alla lista dei materiali
-			return HttpResponseRedirect(reverse("materiali"))
+			return HttpResponseRedirect(reverse("lista_modifica_materiale"))
 	else:
+		proposed_codice = instance.codice
 		proposed_descrizione = instance.descrizione
-		proposed_unita_misura = instance.unita_misura
+		# proposed_unita_misura = instance.unita_misura
 		proposed_sottoscorta = instance.sottoscorta
 
-		form = ModificaMaterialeForm(
+		form = MaterialeForm(
 			initial={
-				"unita_misura": proposed_unita_misura,
+				# "unita_misura": proposed_unita_misura,
+				# "codice": proposed_codice,
+				'codice': proposed_codice,
 				"descrizione": proposed_descrizione,
 				"sottoscorta": proposed_sottoscorta
 			})
@@ -95,26 +96,26 @@ def modifica_materiale(request, pk):
 	return render(request, "catalog/modifica_materiale.html", context)
 
 
+@login_required
 def aggiungi_materiale(request):
 	if request.method == "POST":
 
-		form = ModificaMaterialeForm(request.POST)
+		form = MaterialeForm(request.POST)
 
 		if form.is_valid():
-			# descrizione = request.POST['descrizione']
-			# unita_misura = request.POST['unita_misura']
-			# sottoscorta = request.POST['sottoscorta']
+			codice = form.clean_codice()
 			descrizione = form.clean_descrizione()
-			unita_misura = form.clean_unita_misura()
+			# unita_misura = form.clean_unita_misura()
 			sottoscorta = form.clean_sottoscorta()
 
-			nuovo_materiale = Materiale(descrizione=descrizione, unita_misura=unita_misura, sottoscorta=sottoscorta)
+			# nuovo_materiale = Materiale(descrizione=descrizione, unita_misura=unita_misura, sottoscorta=sottoscorta)
+			nuovo_materiale = Materiale(codice=codice, descrizione=descrizione, sottoscorta=sottoscorta)
 			nuovo_materiale.save()
 			return HttpResponseRedirect(reverse('materiali'))
 
 	else:
 
-		form = ModificaMaterialeForm()
+		form = MaterialeForm()
 
 	context = {
 		"form": form,
@@ -122,16 +123,67 @@ def aggiungi_materiale(request):
 
 	return render(request, "catalog/aggiungi_materiale.html", context)
 
+
+# def cancella_materiale(request):
+
+
+def carico_materiale(request):
+	if request.method == "POST":
+		form = CaricoForm(request.POST)
+
+		if form.is_valid():
+			materiale = form.clean_materiale()
+			quantita = form.clean_quantita()
+			magazzino = form.clean_magazzino()
+
+			nuovo_carico = Movimenti(materiale=materiale, quantita=quantita, magazzino=magazzino)
+			nuovo_carico.save()
+
+			materiale.giacenza += quantita
+			materiale.save()
+
+			return HttpResponseRedirect(reverse('movimenti'))
+
+	else:
+		form = CaricoForm()
+
+	context = {
+		"form": form,
+	}
+
+	return render(request, "catalog/carico.html", context)
+
+
+def scarico_materiale(request):
+	if request.method == "POST":
+		form = CaricoForm(request.POST)
+
+		if form.is_valid():
+			materiale = form.clean_materiale()
+			quantita = form.clean_quantita()
+			magazzino = form.clean_magazzino()
+
+			nuovo_carico = Movimenti(materiale=materiale, quantita=quantita, magazzino=magazzino)
+			nuovo_carico.save()
+
+			materiale.giacenza += quantita
+			materiale.save()
+
+			return HttpResponseRedirect(reverse('movimenti'))
+
+	else:
+		form = CaricoForm()
+
+	context = {
+		"form": form,
+	}
+
+	return render(request, "catalog/carico.html", context)
+# def carico(request):
+# 	if request.method == "POST":
+# 		form = CaricoForm(request.POST)
 #
-# def materiali(request):
-# 	return render(request, "catalog/materiale_list.html")
-#
-#
-# def materiale_view(request):
-# 	id_materiale = Materiale.id_materiale
-#
-# 	return render(request, "catalog/materiale_detail.html", context=id_materiale)
-#
-#
-# def movimenti(request):
-# 	return render(request, "catalog/movimenti_list.html")
+# 		if form.is_valid():
+# 			pass
+# 			return HttpResponseRedirect(reverse('movimenti'))
+# 		else

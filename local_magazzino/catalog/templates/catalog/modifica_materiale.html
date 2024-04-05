@@ -2,14 +2,15 @@
 
 {% block content %}
   <h1>Materiale: {{ instance.descrizione }}</h1>
-  <p>Quantita: {{ instance.quantita }}</p>
 <!--  <p {% if book_instance.is_overdue %} class="text-danger"{% endif %} >Due date: {{ book_instance.due_back }}</p>-->
 
   <form action="" method="post">
     {% csrf_token %}
+    <p><b>Codice</b>: {{ instance.codice }}</p>
     <table>
     {{ form.as_table }}
     </table>
+    <p><b>Unita Misura</b>: {{ instance.unita_misura }}</p>
     <input type="submit" value="Submit">
   </form>
 {% endblock %}
