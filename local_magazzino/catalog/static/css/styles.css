@@ -1,11 +1,7 @@
 .sidebar-nav {
-  margin-top: 20px;
-  padding: 0;
-  list-style: none;
-}
-
-.warning_scorte {
-    background-color: red;
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
 }
 
 #logout-form {
@@ -15,4 +11,3 @@
   padding: 0;
   margin: 0;
 }
-

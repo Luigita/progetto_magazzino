@@ -24,7 +24,13 @@ class ModificaMaterialeView(LoginRequiredMixin, generic.ListView):
 	template_name = "catalog/lista_modifica_materiale.html"
 
 
-class MaterialeDetail(generic.DetailView):
+class CancellaMaterialeView(LoginRequiredMixin, generic.ListView):
+	model = Materiale
+	context_object_name = 'lista_cancella_materiale'
+	template_name = "catalog/lista_cancella_materiale.html"
+
+
+class MaterialeDetail(LoginRequiredMixin, generic.DetailView):
 	model = Materiale
 	context_object_name = "materiale_detail"
 	template_name = "catalog/materiale_detail.html"
@@ -35,7 +41,7 @@ class MovimentiView(LoginRequiredMixin, generic.ListView):
 	context_object_name = 'movimenti_list'
 
 
-class MovimentoDetail(generic.DetailView):
+class MovimentoDetail(LoginRequiredMixin, generic.DetailView):
 	model = Movimenti
 	context_object_name = "movimento_detail"
 	template_name = "catalog/movimento_detail.html"
@@ -68,7 +74,8 @@ def modifica_materiale(request, pk):
 		form = ModificaMaterialeForm(request.POST)
 
 		if form.is_valid():
-			# instance.unita_misura = form.clean_unita_misura()
+			# instance.codice = form.clean_codice()
+			instance.descrizione = form.clean_descrizione()
 			instance.sottoscorta = form.clean_sottoscorta()
 			instance.save()
 
@@ -108,8 +115,7 @@ def aggiungi_materiale(request):
 			# unita_misura = form.clean_unita_misura()
 			sottoscorta = form.clean_sottoscorta()
 
-			# nuovo_materiale = Materiale(descrizione=descrizione, unita_misura=unita_misura, sottoscorta=sottoscorta)
-			nuovo_materiale = Materiale(codice=codice, descrizione=descrizione, sottoscorta=sottoscorta)
+			nuovo_materiale = Materiale(codice=codice, descrizione=descrizione, sottoscorta=sottoscorta, creatore=request.user)
 			nuovo_materiale.save()
 			return HttpResponseRedirect(reverse('materiali'))
 
@@ -124,9 +130,15 @@ def aggiungi_materiale(request):
 	return render(request, "catalog/aggiungi_materiale.html", context)
 
 
-# def cancella_materiale(request):
+@login_required
+def cancella_materiale(request, pk):
+	instance = get_object_or_404(Materiale, pk=pk)
+	if instance.delete():
+		return render(request, "catalog/conferma_cancellazione.html")
+	raise ValueError()
 
 
+@login_required
 def carico_materiale(request):
 	if request.method == "POST":
 		form = CaricoForm(request.POST)
@@ -138,9 +150,13 @@ def carico_materiale(request):
 
 			nuovo_carico = Movimenti(materiale=materiale, quantita=quantita, magazzino=magazzino)
 			nuovo_carico.save()
+			# TODO: da togliere, ora solo per debug
+			print(materiale.get_giacenza_magazzino(magazzino))
 
-			materiale.giacenza += quantita
-			materiale.save()
+			materiale.carico_materiale(quantita)
+			#
+			# materiale.giacenza += quantita
+			# materiale.save()
 
 			return HttpResponseRedirect(reverse('movimenti'))
 
@@ -154,6 +170,7 @@ def carico_materiale(request):
 	return render(request, "catalog/carico.html", context)
 
 
+@login_required
 def scarico_materiale(request):
 	if request.method == "POST":
 		form = CaricoForm(request.POST)
@@ -163,13 +180,20 @@ def scarico_materiale(request):
 			quantita = form.clean_quantita()
 			magazzino = form.clean_magazzino()
 
-			nuovo_carico = Movimenti(materiale=materiale, quantita=quantita, magazzino=magazzino)
-			nuovo_carico.save()
+			errore_quantita = materiale.giacenza
 
-			materiale.giacenza += quantita
-			materiale.save()
+			materiale.giacenza -= quantita
 
-			return HttpResponseRedirect(reverse('movimenti'))
+			if materiale.giacenza >= 0:
+				nuovo_carico = Movimenti(materiale=materiale, quantita=-quantita, magazzino=magazzino)
+				nuovo_carico.save()
+				materiale.save()
+
+				return HttpResponseRedirect(reverse('movimenti'))
+
+			else:
+				# TODO: METTERE UN REDIRECT A UNA PAGINA DI ERRORE CHE TI PERMETTE POI DI TORNARE INDIETRO
+				return HttpResponse("Errore quantita, sono disponibili solo " + str(errore_quantita) + " pezzi")
 
 	else:
 		form = CaricoForm()
@@ -178,12 +202,4 @@ def scarico_materiale(request):
 		"form": form,
 	}
 
-	return render(request, "catalog/carico.html", context)
-# def carico(request):
-# 	if request.method == "POST":
-# 		form = CaricoForm(request.POST)
-#
-# 		if form.is_valid():
-# 			pass
-# 			return HttpResponseRedirect(reverse('movimenti'))
-# 		else
+	return render(request, "catalog/scarico.html", context)

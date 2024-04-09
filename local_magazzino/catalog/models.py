@@ -5,7 +5,6 @@ from django.urls import reverse  # Used in get_absolute_url() to get URL for spe
 from django.db.models import UniqueConstraint  # Constrains fields to unique values
 from django.db.models.functions import Lower  # Returns lower cased value of field
 
-import uuid  # Required for unique book instances
 from django.db import models
 from django.utils import timezone
 
@@ -38,10 +37,22 @@ class Materiale(models.Model):
 		"""Create a string for the id. This is required to display id in Admin."""
 		return self.id
 
+	def carico_materiale(self, quantita):
+		self.giacenza += quantita
+		self.save()
+
+	def get_giacenza_magazzino(self, magazzino):
+		giacenza = 0
+		for mov in Movimenti.objects.all():
+			if mov.materiale == self and mov.magazzino == magazzino:
+				giacenza += mov.quantita
+		# print(giacenza)
+		return giacenza
+
 
 class Movimenti(models.Model):
 	"""Modello rappresentante la movimentazione di un materiale"""
-	materiale = models.ForeignKey("Materiale", on_delete=models.RESTRICT, null=True, related_name="movimenti")
+	materiale = models.ForeignKey("Materiale", on_delete=models.CASCADE, null=True, related_name="movimenti")
 	quantita = models.IntegerField(blank=False, null=False)
 
 	# TODO: METTERE UTENTE LOGGATO COME PREDEFINITO

@@ -1,6 +1,3 @@
-<!--TODO: DA RIVEDERE-->
-
-
 {% extends "base_generic.html" %}
 
 {% block content %}
@@ -11,8 +8,7 @@
       <li>
         <a href="modifica_materiale/{{ materiale.pk }}">{{ materiale.codice }}</a>
         "{{ materiale.descrizione }}"
-        <!--TODO: materiale. fai la somma dei movimenti del materiale per vedere quanti pezzi sono disponibili-->
-        numeri
+        {{materiale.giacenza}}
         {{materiale.unita_misura}}
       </li>
       {% endfor %}

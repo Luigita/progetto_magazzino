@@ -79,7 +79,7 @@ class MaterialeForm(forms.Form):
 
 
 class ModificaMaterialeForm(forms.Form):
-	# codice = forms.CharField()
+	codice = forms.CharField()
 	descrizione = forms.CharField()
 	# quantita = forms.IntegerField()
 	# unita_misura = forms.CharField()
@@ -88,7 +88,16 @@ class ModificaMaterialeForm(forms.Form):
 	# creatore = forms.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 	def __init__(self, *args, **kwargs):
 		super(ModificaMaterialeForm, self).__init__(*args, **kwargs)
-		self.fields['codice'].disabled = True
+		instance = getattr(self, 'instance', None)
+		if instance and instance.pk:
+			self.fields['codice'].widget.attrs["readonly"] = True
+
+	def clean_codice(self):
+		instance = getattr(self, 'instance', None)
+		if instance and instance.pk:
+			return instance.codice
+		else:
+			return self.cleaned_data['codice']
 
 	def clean_sottoscorta(self):
 		data = self.cleaned_data["sottoscorta"]

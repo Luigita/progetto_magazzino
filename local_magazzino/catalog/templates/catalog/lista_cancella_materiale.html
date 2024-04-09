@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Cancella Materiale</h1>
+    <h2>Scegli il materiale da cancellare.</h2>
+      <h3>L'operazione non può essere annullata, tutti i movimenti relativi al materiale verranno eliminati</h3>
+  {% if lista_cancella_materiale %}
+    <ul>
+      {% for materiale in lista_cancella_materiale %}
+      <li>
+        <a href="cancella_materiale/{{ materiale.pk }}">{{ materiale.codice }}</a>
+        "{{ materiale.descrizione }}"
+        {{materiale.giacenza}}
+        {{materiale.unita_misura}}
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Non ci sono materiali registrati.</p>
+  {% endif %}
+{% endblock %}
