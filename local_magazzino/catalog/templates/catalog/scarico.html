@@ -1,13 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Carico materiale</h1>
+  <h1>Scarico materiale</h1>
 
   <form action="" method="post">
     {% csrf_token %}
     <table>
     {{ form.as_table }}
     </table>
-    <input type="submit" value="OK">
+    <input type="submit" value="Submit">
   </form>
 {% endblock %}

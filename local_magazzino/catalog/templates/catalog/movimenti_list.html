@@ -8,8 +8,9 @@
       <li>
         <a href="{{ movimenti.get_absolute_url }}">{{ movimenti.materiale.codice }}</a>
         "{{ movimenti.materiale.descrizione }}"
-        ({{movimenti.quantita}})
+        {% if movimenti.quantita < 0 %} <b style="background-color: red"> ↓({{movimenti.quantita}}) </b> {% else %} <b style="background-color: LightGreen"> ↑({{movimenti.quantita}})</b> {% endif %}
         ({{movimenti.magazzino}})
+        {{movimenti.data_movimento}}
       </li>
       {% endfor %}
     </ul>
