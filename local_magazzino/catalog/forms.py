@@ -1,4 +1,4 @@
-import django_filters
+# import django_filters
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -175,7 +175,7 @@ class TrasferimentoForm(forms.Form):
 		return data
 
 
-class MaterialeFilter(django_filters.FilterSet):
-	class Meta:
-		model = Materiale
-		fields = ["codice", "descrizione"]
+# class MaterialeFilter(django_filters.FilterSet):
+# 	class Meta:
+# 		model = Materiale
+# 		fields = ["codice", "descrizione"]

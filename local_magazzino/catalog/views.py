@@ -13,7 +13,7 @@ from reportlab.graphics.barcode import code128
 
 from django.views.generic.detail import SingleObjectMixin
 
-from .forms import MaterialeForm, MovimentoForm, ModificaMaterialeForm, MaterialeFilter, TrasferimentoForm
+from .forms import MaterialeForm, MovimentoForm, ModificaMaterialeForm, TrasferimentoForm
 
 # Create your views here.
 
@@ -275,20 +275,20 @@ def trasferimento_magazzino(request):
 	return render(request, "catalog/carico.html", context)
 
 
-@login_required
-def cerca_materiale(request):
-	# if request.method == "GET":
-	#
-	# 	form = MaterialeFilter(request.GET)
-	#
-	# 	if form.is_valid():
-	#
-	# 		return HttpResponseRedirect(reverse('materiali'))
-	#
-	# else:
+# @login_required
+# def cerca_materiale(request):
+# 	# if request.method == "GET":
+# 	#
+# 	# 	form = MaterialeFilter(request.GET)
+# 	#
+# 	# 	if form.is_valid():
+# 	#
+# 	# 		return HttpResponseRedirect(reverse('materiali'))
+# 	#
+# 	# else:
 
-	f = MaterialeFilter(request.GET, queryset=Materiale.objects.all())
-	return render(request, 'catalog/materiale_filter.html', {'filter': f})
+# 	f = MaterialeFilter(request.GET, queryset=Materiale.objects.all())
+# 	return render(request, 'catalog/materiale_filter.html', {'filter': f})
 
 
 def genera_etichetta(request, pk):

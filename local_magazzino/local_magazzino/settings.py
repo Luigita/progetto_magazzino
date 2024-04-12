@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'local_magazzino.wsgi.application'
 DATABASES = {
 	'default': {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "luigita$default",
+        "NAME": "luigita$magazzino_mysql",
         "USER": "luigita",
         "PASSWORD": "Napoli@2021!",
         "HOST": "luigita.mysql.pythonanywhere-services.com",
