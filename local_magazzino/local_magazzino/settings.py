@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
 	'catalog.apps.CatalogConfig',
 
+	'django_filters',
+
 ]
 
 MIDDLEWARE = [

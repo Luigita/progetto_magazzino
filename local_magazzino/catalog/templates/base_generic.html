@@ -35,6 +35,7 @@
                  <br>
                  <li><a href="{% url 'carico' %}">Carico Magazzino</a></li>
                  <li><a href="{% url 'scarico' %}">Scarico Magazzino</a></li>
+                 <li><a href="{% url 'trasferimento' %}">Trasferimento NAP -> MIL</a></li>
                  <br>
                  <li>
                    <form id="logout-form" method="post" action="{% url 'logout' %}?next={{ request.path }}">

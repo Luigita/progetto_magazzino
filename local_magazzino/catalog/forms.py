@@ -1,8 +1,9 @@
+import django_filters
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from .models import Materiale
+from .models import Materiale, Magazzino
 
 
 # class AggiungiMaterialeForm(forms.Form):
@@ -112,23 +113,25 @@ class ModificaMaterialeForm(forms.Form):
 		return data
 
 
-class CancellazioneMateriale(forms.Form):
-	materiale = forms.ModelChoiceField(queryset=Materiale.objects.all())
+#
+# class CancellazioneMateriale(forms.Form):
+# 	materiale = forms.ModelChoiceField(queryset=Materiale.objects.all())
+#
+# 	def clean_materiale(self):
+# 		data = self.cleaned_data["materiale"]
+# 		return data
 
-	def clean_materiale(self):
-		data = self.cleaned_data["materiale"]
-		return data
 
-
-class CaricoForm(forms.Form):
-	materiale = forms.ModelChoiceField(queryset=Materiale.objects.all())
+class MovimentoForm(forms.Form):
+	# materiale = forms.ModelChoiceField(queryset=Materiale.objects.all())
+	materiale = forms.CharField(max_length=20)
 	quantita = forms.IntegerField()
 
-	magazzino_choices = (
-		("NAP", "Napoli"),
-		("MIL", "Milano"),
-	)
-	magazzino = forms.ChoiceField(choices=magazzino_choices)
+	magazzino = forms.ModelChoiceField(queryset=Magazzino.objects.all())
+
+	def __init__(self, *args, **kwargs):
+		super(MovimentoForm, self).__init__(*args, **kwargs)
+		self.fields["materiale"].widget.attrs.update({"autofocus": "autofocus"})
 
 	def clean_materiale(self):
 		data = self.cleaned_data["materiale"]
@@ -147,3 +150,32 @@ class CaricoForm(forms.Form):
 	def clean_magazzino(self):
 		data = self.cleaned_data["magazzino"]
 		return data
+
+
+class TrasferimentoForm(forms.Form):
+	materiale = forms.ModelChoiceField(queryset=Materiale.objects.all())
+	quantita = forms.IntegerField()
+
+	def clean_materiale(self):
+		data = self.cleaned_data["materiale"]
+		return data
+
+	def clean_quantita(self):
+		data = self.cleaned_data["quantita"]
+
+		if data < 0:
+			raise ValidationError(_("La quantità di trasferimento non può essere negativa"))
+		if data == 0:
+			raise ValidationError(_("La quantità di trasferimento non può essere 0"))
+
+		return data
+
+	def clean_magazzino(self):
+		data = self.cleaned_data["magazzino"]
+		return data
+
+
+class MaterialeFilter(django_filters.FilterSet):
+	class Meta:
+		model = Materiale
+		fields = ["codice", "descrizione"]
