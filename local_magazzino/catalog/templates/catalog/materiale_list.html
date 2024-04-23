@@ -8,7 +8,6 @@
       <li>
         <pre><a href="{{ materiale.get_absolute_url }}">{{ materiale.codice }}</a> "{{materiale.descrizione}}" Sottoscorta: {{materiale.sottoscorta}}
           {% if materiale.giacenza >= materiale.sottoscorta %}<b style="background-color: LightGreen;">{{materiale.giacenza}} {{materiale.unita_misura}}</b>{% else %}<b style="background-color: red;">{{materiale.giacenza}} {{materiale.unita_misura}}</b>{% endif %}
-          {{ materiale.get_giacenze }}
         </pre>
       </li>
       {% endfor %}

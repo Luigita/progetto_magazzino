@@ -29,18 +29,11 @@ class Magazzino(models.Model):
 
 class Materiale(models.Model):
 	"""Modello rappresentante un materiale presente in magazzino"""
-
-	codice = models.CharField(max_length=70, null=True, blank=False, unique=True)
-
-	articolo = models.CharField(max_length=50, null=True, blank=False)
-	taglia = models.IntegerField(null=True, blank=False)
-
+	codice = models.CharField(max_length=20, null=True, blank=False, unique=True)
 	descrizione = models.CharField(max_length=50, null=False, blank=False)
 	unita_misura = models.CharField(max_length=5, null=False, blank=False, default="PZ")
 	sottoscorta = models.IntegerField()
 	creatore = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
-
-
 
 	# TODO: QUANDO SI FA IL CARICO A MAGAZZINO SALVARE IL FIELD
 	magazzini_giacenza = models.ManyToManyField(Magazzino, blank=True, through="MaterialeMagazzino")
@@ -68,36 +61,12 @@ class Materiale(models.Model):
 		self.giacenza += quantita
 		self.save()
 
-	# def get_giacenza_magazzino(self, magazzino):
-	# 	giacenza = 0
-	# 	for mov in Movimenti.objects.all():
-	# 		if mov.materiale == self and mov.magazzino == magazzino:
-	# 			giacenza += mov.quantita
-	# 	return giacenza
-
-	def get_giacenze(self):
+	def get_giacenza_magazzino(self, magazzino):
 		giacenza = 0
-		giacenze = ""
-		for mag in Magazzino.objects.all():
-			for mov in Movimenti.objects.filter(magazzino__pk__exact=mag.pk):
-				if mov.materiale == self:
-					giacenza += mov.quantita
-			giacenze += mag.localita + " " + str(giacenza) + "\n"
-			giacenza = 0
-		return giacenze
-
-	def get_giacenza_milano(self):
-		giacenza = 0
-		for mov in Movimenti.objects.filter(magazzino__pk__exact=2):
-			if mov.materiale == self:
+		for mov in Movimenti.objects.all():
+			if mov.materiale == self and mov.magazzino == magazzino:
 				giacenza += mov.quantita
-		return giacenza
-
-	def get_giacenza_napoli(self):
-		giacenza = 0
-		for mov in Movimenti.objects.filter(magazzino__pk__exact=1):
-			if mov.materiale == self:
-				giacenza += mov.quantita
+		# print(giacenza)
 		return giacenza
 
 
