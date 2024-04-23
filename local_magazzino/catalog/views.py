@@ -277,19 +277,11 @@ def scarico_materiale(request):
 			magazzino = form.clean_magazzino()
 
 			materiale_db = get_object_or_404(Materiale, codice=materiale)
-<<<<<<< HEAD
 
 			errore_quantita = materiale_db.giacenza
 
 			materiale_db.giacenza -= quantita
 
-=======
-
-			errore_quantita = materiale_db.giacenza
-
-			materiale_db.giacenza -= quantita
-
->>>>>>> d24c0c4d7f1ba9e434ad8fb1107cf2230cc058f7
 			if materiale_db.giacenza >= 0:
 				nuovo_scarico = Movimenti(materiale=materiale_db, quantita=-quantita, magazzino=magazzino)
 				nuovo_scarico.save()

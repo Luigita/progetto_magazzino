@@ -1,6 +1,8 @@
 .env
 local_magazzino/local_magazzino/settings.py
-
+local_magazzino/local_magazzino/catalog/migrations
+local_magazzino/local_magazzino/static/
+local_magazzino/catalog/migrations/
 ### Django template
 *.log
 *.pot
