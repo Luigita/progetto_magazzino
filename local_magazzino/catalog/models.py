@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 
 class Magazzino(models.Model):
 	localita = models.CharField(max_length=3, unique=True)
+	descrizione = models.CharField(max_length=50, null=True)
 
 	class Meta:
 		verbose_name = "Magazzino"

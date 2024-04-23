@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Modifica Magazzino</h1>
+  {% if lista_modifica_magazzini %}
+    <ul>
+      {% for magazzino in lista_modifica_magazzini %}
+      <li>
+        <a href="modifica_magazzino/{{ magazzino.pk }}">{{ magazzino.localita }}</a>
+        "{{ magazzino.descrizione }}"
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Non ci sono magazzini registrati.</p>
+  {% endif %}
+{% endblock %}

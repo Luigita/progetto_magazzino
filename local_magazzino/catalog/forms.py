@@ -74,7 +74,6 @@ class MaterialeForm(forms.Form):
 
 
 class ModificaMaterialeForm(forms.Form):
-
 	descrizione = forms.CharField()
 	sottoscorta = forms.IntegerField()
 
@@ -157,6 +156,34 @@ class TrasferimentoForm(forms.Form):
 
 	def clean_magazzino(self):
 		data = self.cleaned_data["magazzino"]
+		return data
+
+
+class MagazzinoForm(forms.Form):
+	localita = forms.CharField(max_length=3)
+	descrizione = forms.CharField()
+
+	def clean_localita(self):
+		data = self.cleaned_data["localita"]
+		if len(data) > 3:
+			raise ValidationError(_("Max 3 caratteri"))
+		return data
+
+	def clean_descrizione(self):
+		data = self.cleaned_data["descrizione"]
+
+		if False:
+			return ValidationError(_("Errore"))
+		return data
+
+
+class ModificaMagazzinoForm(forms.Form):
+	descrizione = forms.CharField()
+
+	def clean_descrizione(self):
+		data = self.cleaned_data["descrizione"]
+		if False:
+			return ValidationError(_("Errore"))
 		return data
 
 
