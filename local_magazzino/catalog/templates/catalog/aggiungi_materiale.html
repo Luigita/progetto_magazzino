@@ -12,5 +12,15 @@
     </table>
     <p><b>Unita Misura</b>: PZ</p>
     <input type="submit" value="Submit">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}ATTENZIONE! {% endif %}
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
   </form>
 {% endblock %}
