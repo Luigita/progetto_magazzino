@@ -201,14 +201,16 @@ def scarico_materiale(request):
 			quantita = form.clean_quantita()
 			magazzino = form.clean_magazzino()
 
-			errore_quantita = materiale.giacenza
+			materiale_db = get_object_or_404(Materiale, codice=materiale)
 
-			materiale.giacenza -= quantita
+			errore_quantita = materiale_db.giacenza
 
-			if materiale.giacenza >= 0:
-				nuovo_scarico = Movimenti(materiale=materiale, quantita=-quantita, magazzino=magazzino)
+			materiale_db.giacenza -= quantita
+
+			if materiale_db.giacenza >= 0:
+				nuovo_scarico = Movimenti(materiale=materiale_db, quantita=-quantita, magazzino=magazzino)
 				nuovo_scarico.save()
-				materiale.save()
+				materiale_db.save()
 
 				return HttpResponseRedirect(reverse('movimenti'))
 
@@ -305,6 +307,7 @@ def genera_etichetta(request, pk):
 
 	barcode = code128.Code128(instance.codice, barHeight=10 * mm, barWidth=1.2)
 	barcode.drawOn(p, 10, 100)
+	p.drawString(20, 140, ("Codice materiale: " + instance.codice))
 
 	p.showPage()
 	p.save()
