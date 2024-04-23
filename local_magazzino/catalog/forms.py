@@ -1,4 +1,4 @@
-# import django_filters
+import django_filters
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -39,23 +39,17 @@ from .models import Materiale, Magazzino
 
 
 class MaterialeForm(forms.Form):
-	codice = forms.CharField()
+	articolo = forms.CharField()
+	taglia = forms.IntegerField()
 	descrizione = forms.CharField()
-	# quantita = forms.IntegerField()
-	# unita_misura = forms.CharField()
 	sottoscorta = forms.IntegerField()
 
-	# creatore = forms.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+	def clean_articolo(self):
+		data = self.cleaned_data["articolo"]
+		return data
 
-	def clean_codice(self):
-		data = self.cleaned_data["codice"]
-
-		# verifica l'unicita della codice
-		if Materiale.objects.filter(codice=data):
-			if len(data) > 50:
-				raise ValidationError(_("codice non unico\nmax 50 caratteri "))
-			raise ValidationError(_("codice non unico"))
-
+	def clean_taglia(self):
+		data = self.cleaned_data["taglia"]
 		return data
 
 	def clean_unita_misura(self):
@@ -80,18 +74,8 @@ class MaterialeForm(forms.Form):
 
 
 class ModificaMaterialeForm(forms.Form):
-	codice = forms.CharField()
 	descrizione = forms.CharField()
-	# quantita = forms.IntegerField()
-	# unita_misura = forms.CharField()
 	sottoscorta = forms.IntegerField()
-
-	# creatore = forms.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
-	def __init__(self, *args, **kwargs):
-		super(ModificaMaterialeForm, self).__init__(*args, **kwargs)
-		instance = getattr(self, 'instance', None)
-		if instance and instance.pk:
-			self.fields['codice'].widget.attrs["readonly"] = True
 
 	def clean_codice(self):
 		instance = getattr(self, 'instance', None)
@@ -175,7 +159,35 @@ class TrasferimentoForm(forms.Form):
 		return data
 
 
-# class MaterialeFilter(django_filters.FilterSet):
-# 	class Meta:
-# 		model = Materiale
-# 		fields = ["codice", "descrizione"]
+class MagazzinoForm(forms.Form):
+	localita = forms.CharField(max_length=3)
+	descrizione = forms.CharField()
+
+	def clean_localita(self):
+		data = self.cleaned_data["localita"]
+		if len(data) > 3:
+			raise ValidationError(_("Max 3 caratteri"))
+		return data
+
+	def clean_descrizione(self):
+		data = self.cleaned_data["descrizione"]
+
+		if False:
+			return ValidationError(_("Errore"))
+		return data
+
+
+class ModificaMagazzinoForm(forms.Form):
+	descrizione = forms.CharField()
+
+	def clean_descrizione(self):
+		data = self.cleaned_data["descrizione"]
+		if False:
+			return ValidationError(_("Errore"))
+		return data
+
+
+class MaterialeFilter(django_filters.FilterSet):
+	class Meta:
+		model = Materiale
+		fields = ["codice", "descrizione"]

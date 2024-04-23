@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Lista Magazzini</h1>
+  {% if magazzino_list %}
+    <ul>
+      {% for magazzino in magazzino_list %}
+      <li>
+          <a href="{{ magazzino.get_absolute_url }}">{{ magazzino.localita }}</a> "{{magazzino.descrizione}}"
+      </li>
+      {% endfor %}
+    </ul>
+    <button onclick="window.print()">Stampa</button>
+  {% else %}
+    <p>Non ci sono magazzini registrati.</p>
+  {% endif %}
+{% endblock %}
