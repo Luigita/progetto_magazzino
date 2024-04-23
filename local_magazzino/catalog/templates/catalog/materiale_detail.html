@@ -9,8 +9,6 @@
         sottoscorta: {{materiale_detail.sottoscorta}}
 
       </body>
-      <form action="{{ materiale_detail.get_url_etichetta }}">
-        <input type="submit" value="Stampa etichetta" />
-      </form>
+      <a href="{{ materiale_detail.get_url_etichetta }}">Stampa etichetta</a>
     </ul>
 {% endblock %}
