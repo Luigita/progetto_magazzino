@@ -24,6 +24,7 @@
               <li><a href="{% url 'index' %}">Home</a></li>
               <li><a href="{% url 'materiali' %}">Tutti i Materiali</a></li>
               <li><a href="{% url 'movimenti' %}">Tutti i Movimenti</a></li>
+              <li><a href="{% url 'magazzini' %}">Tutti i Magazzini</a></li>
                 <br>
               {% if user.is_authenticated %}
                  <li>Utente: {{ user.get_username }}</li>
@@ -32,6 +33,9 @@
                  <li><a href="{% url 'aggiungi_materiale' %}">Aggiungi Materiale</a></li>
                  <li><a href="{% url 'lista_modifica_materiale' %}">Modifica Materiale</a></li>
                  <li><a href="{% url 'lista_cancella_materiale' %}">Cancella Materiale</a></li>
+                 <br>
+                 <li><a href="{% url 'aggiungi_magazzino' %}">Aggiungi Magazzino</a></li>
+                 <li><a href="{% url 'lista_modifica_magazzini' %}">Modifica Magazzino</a></li>
                  <br>
                  <li><a href="{% url 'carico' %}">Carico Magazzino</a></li>
                  <li><a href="{% url 'scarico' %}">Scarico Magazzino</a></li>

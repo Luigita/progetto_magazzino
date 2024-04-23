@@ -1,4 +1,4 @@
-# import django_filters
+import django_filters
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -74,7 +74,6 @@ class MaterialeForm(forms.Form):
 
 
 class ModificaMaterialeForm(forms.Form):
-
 	descrizione = forms.CharField()
 	sottoscorta = forms.IntegerField()
 
@@ -160,7 +159,35 @@ class TrasferimentoForm(forms.Form):
 		return data
 
 
-# class MaterialeFilter(django_filters.FilterSet):
-# 	class Meta:
-# 		model = Materiale
-# 		fields = ["codice", "descrizione"]
+class MagazzinoForm(forms.Form):
+	localita = forms.CharField(max_length=3)
+	descrizione = forms.CharField()
+
+	def clean_localita(self):
+		data = self.cleaned_data["localita"]
+		if len(data) > 3:
+			raise ValidationError(_("Max 3 caratteri"))
+		return data
+
+	def clean_descrizione(self):
+		data = self.cleaned_data["descrizione"]
+
+		if False:
+			return ValidationError(_("Errore"))
+		return data
+
+
+class ModificaMagazzinoForm(forms.Form):
+	descrizione = forms.CharField()
+
+	def clean_descrizione(self):
+		data = self.cleaned_data["descrizione"]
+		if False:
+			return ValidationError(_("Errore"))
+		return data
+
+
+class MaterialeFilter(django_filters.FilterSet):
+	class Meta:
+		model = Materiale
+		fields = ["codice", "descrizione"]

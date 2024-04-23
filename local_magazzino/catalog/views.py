@@ -15,7 +15,8 @@ from reportlab.graphics.barcode import code128
 
 from django.views.generic.detail import SingleObjectMixin
 
-from .forms import MaterialeForm, MovimentoForm, ModificaMaterialeForm, TrasferimentoForm
+from .forms import MaterialeForm, MovimentoForm, ModificaMaterialeForm, MaterialeFilter, TrasferimentoForm, \
+	MagazzinoForm, ModificaMagazzinoForm
 
 # Create your views here.
 
@@ -44,6 +45,23 @@ class MaterialeDetail(LoginRequiredMixin, generic.DetailView):
 	model = Materiale
 	context_object_name = "materiale_detail"
 	template_name = "catalog/materiale_detail.html"
+
+
+class MagazziniView(LoginRequiredMixin, generic.ListView):
+	model = Magazzino
+	context_object_name = "magazzino_list"
+
+
+class ModificaMagazzinoView(LoginRequiredMixin, generic.ListView):
+	model = Magazzino
+	context_object_name = "lista_modifica_magazzini"
+	template_name = "catalog/lista_modifica_magazzini.html"
+
+
+class MagazzinoDetail(LoginRequiredMixin, generic.DetailView):
+	model = Magazzino
+	context_object_name = "magazzino_detail"
+	template_name = "catalog/magazzino_detail.html"
 
 
 class MovimentiView(LoginRequiredMixin, generic.ListView):
@@ -146,6 +164,62 @@ def cancella_materiale(request, pk):
 	if instance.delete():
 		return render(request, "catalog/conferma_cancellazione.html")
 	raise ValueError()
+
+
+@login_required
+def aggiungi_magazzino(request):
+	if request.method == "POST":
+		form = MagazzinoForm(request.POST)
+
+		if form.is_valid():
+			localita = form.clean_localita()
+			descrizione = form.clean_descrizione()
+
+			if Magazzino.objects.filter(localita=localita):
+				messages.error(request, "Codice non univoco")
+			else:
+				nuovo_magazzino = Magazzino(localita=localita, descrizione=descrizione)
+				nuovo_magazzino.save()
+				return HttpResponseRedirect(reverse('magazzini'))
+
+	else:
+		form = MagazzinoForm()
+
+	context = {
+		"form": form,
+	}
+
+	return render(request, "catalog/aggiungi_magazzino.html", context)
+
+
+@login_required
+def modifica_magazzino(request, pk):
+	instance = get_object_or_404(Magazzino, pk=pk)
+
+	if request.method == "POST":
+		form = ModificaMagazzinoForm(request.POST)
+
+		if form.is_valid():
+			instance.descrizione = form.clean_descrizione()
+			instance.save()
+
+			return HttpResponseRedirect(reverse('lista_modifica_magazzini'))
+
+	else:
+		proposed_descrizione = instance.descrizione
+
+		form = ModificaMagazzinoForm(
+			initial={
+				"descrizione": proposed_descrizione
+			}
+		)
+
+	context = {
+		"form": form,
+		"instance": instance,
+	}
+
+	return render(request, "catalog/modifica_magazzino.html", context)
 
 
 @login_required
@@ -287,20 +361,20 @@ def trasferimento_magazzino(request):
 	return render(request, "catalog/carico.html", context)
 
 
-# @login_required
-# def cerca_materiale(request):
-# 	# if request.method == "GET":
-# 	#
-# 	# 	form = MaterialeFilter(request.GET)
-# 	#
-# 	# 	if form.is_valid():
-# 	#
-# 	# 		return HttpResponseRedirect(reverse('materiali'))
-# 	#
-# 	# else:
+@login_required
+def cerca_materiale(request):
+	# if request.method == "GET":
+	#
+	# 	form = MaterialeFilter(request.GET)
+	#
+	# 	if form.is_valid():
+	#
+	# 		return HttpResponseRedirect(reverse('materiali'))
+	#
+	# else:
 
-# 	f = MaterialeFilter(request.GET, queryset=Materiale.objects.all())
-# 	return render(request, 'catalog/materiale_filter.html', {'filter': f})
+	f = MaterialeFilter(request.GET, queryset=Materiale.objects.all())
+	return render(request, 'catalog/materiale_filter.html', {'filter': f})
 
 
 def genera_etichetta(request, pk):
