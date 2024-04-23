@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Materiale, Movimenti
+from .models import Materiale, Movimenti, Magazzino, MaterialeMagazzino
 
 
 # Define the admin class
@@ -13,3 +13,12 @@ class MaterialeAdmin(admin.ModelAdmin):
 class MovimentiAdmin(admin.ModelAdmin):
 	list_display = ("data_movimento", "materiale", "quantita", "magazzino", "creatore")
 
+
+@admin.register(Magazzino)
+class MagazzinoAdmin(admin.ModelAdmin):
+	list_display = ("localita",)
+
+
+@admin.register(MaterialeMagazzino)
+class MaterialeMagazzinoAdmin(admin.ModelAdmin):
+	list_display = ("materiale", "magazzino", "giacenza")
