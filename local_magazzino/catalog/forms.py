@@ -39,23 +39,17 @@ from .models import Materiale, Magazzino
 
 
 class MaterialeForm(forms.Form):
-	codice = forms.CharField()
+	articolo = forms.CharField()
+	taglia = forms.IntegerField()
 	descrizione = forms.CharField()
-	# quantita = forms.IntegerField()
-	# unita_misura = forms.CharField()
 	sottoscorta = forms.IntegerField()
 
-	# creatore = forms.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+	def clean_articolo(self):
+		data = self.cleaned_data["articolo"]
+		return data
 
-	def clean_codice(self):
-		data = self.cleaned_data["codice"]
-
-		# verifica l'unicita della codice
-		if Materiale.objects.filter(codice=data):
-			if len(data) > 50:
-				raise ValidationError(_("codice non unico\nmax 50 caratteri "))
-			raise ValidationError(_("codice non unico"))
-
+	def clean_taglia(self):
+		data = self.cleaned_data["taglia"]
 		return data
 
 	def clean_unita_misura(self):
@@ -80,18 +74,9 @@ class MaterialeForm(forms.Form):
 
 
 class ModificaMaterialeForm(forms.Form):
-	codice = forms.CharField()
-	descrizione = forms.CharField()
-	# quantita = forms.IntegerField()
-	# unita_misura = forms.CharField()
-	sottoscorta = forms.IntegerField()
 
-	# creatore = forms.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
-	def __init__(self, *args, **kwargs):
-		super(ModificaMaterialeForm, self).__init__(*args, **kwargs)
-		instance = getattr(self, 'instance', None)
-		if instance and instance.pk:
-			self.fields['codice'].widget.attrs["readonly"] = True
+	descrizione = forms.CharField()
+	sottoscorta = forms.IntegerField()
 
 	def clean_codice(self):
 		instance = getattr(self, 'instance', None)
