@@ -2,7 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect, FileResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
+from django.template import RequestContext
 from django.urls import reverse
 from reportlab.lib.units import mm
 from reportlab.pdfgen import canvas
@@ -82,23 +84,17 @@ def modifica_materiale(request, pk):
 		form = ModificaMaterialeForm(request.POST)
 
 		if form.is_valid():
-			# instance.codice = form.clean_codice()
 			instance.descrizione = form.clean_descrizione()
 			instance.sottoscorta = form.clean_sottoscorta()
 			instance.save()
 
 			return HttpResponseRedirect(reverse("lista_modifica_materiale"))
 	else:
-		proposed_codice = instance.codice
 		proposed_descrizione = instance.descrizione
-		# proposed_unita_misura = instance.unita_misura
 		proposed_sottoscorta = instance.sottoscorta
 
-		form = MaterialeForm(
+		form = ModificaMaterialeForm(
 			initial={
-				# "unita_misura": proposed_unita_misura,
-				# "codice": proposed_codice,
-				'codice': proposed_codice,
 				"descrizione": proposed_descrizione,
 				"sottoscorta": proposed_sottoscorta
 			})
@@ -118,15 +114,20 @@ def aggiungi_materiale(request):
 		form = MaterialeForm(request.POST)
 
 		if form.is_valid():
-			codice = form.clean_codice()
+			articolo = form.clean_articolo()
+			taglia = form.clean_taglia()
 			descrizione = form.clean_descrizione()
-			# unita_misura = form.clean_unita_misura()
 			sottoscorta = form.clean_sottoscorta()
 
-			nuovo_materiale = Materiale(codice=codice, descrizione=descrizione, sottoscorta=sottoscorta,
-										creatore=request.user)
-			nuovo_materiale.save()
-			return HttpResponseRedirect(reverse('materiali'))
+			codice = articolo + str(taglia)
+
+			if Materiale.objects.filter(codice=codice):
+				messages.error(request, "Codice non univoco.")
+			else:
+				nuovo_materiale = Materiale(codice=codice, articolo=articolo, taglia=taglia,
+											descrizione=descrizione, sottoscorta=sottoscorta, creatore=request.user)
+				nuovo_materiale.save()
+				return HttpResponseRedirect(reverse('materiali'))
 
 	else:
 
@@ -201,14 +202,16 @@ def scarico_materiale(request):
 			quantita = form.clean_quantita()
 			magazzino = form.clean_magazzino()
 
-			errore_quantita = materiale.giacenza
+			materiale_db = get_object_or_404(Materiale, codice=materiale)
 
-			materiale.giacenza -= quantita
+			errore_quantita = materiale_db.giacenza
 
-			if materiale.giacenza >= 0:
-				nuovo_scarico = Movimenti(materiale=materiale, quantita=-quantita, magazzino=magazzino)
+			materiale_db.giacenza -= quantita
+
+			if materiale_db.giacenza >= 0:
+				nuovo_scarico = Movimenti(materiale=materiale_db, quantita=-quantita, magazzino=magazzino)
 				nuovo_scarico.save()
-				materiale.save()
+				materiale_db.save()
 
 				return HttpResponseRedirect(reverse('movimenti'))
 
@@ -255,7 +258,8 @@ def trasferimento_magazzino(request):
 				nuovo_carico = Movimenti(materiale=materiale, quantita=quantita, magazzino=Magazzino.objects.get(pk=2))
 				nuovo_carico.save()
 
-				print(materiale.get_giacenza_magazzino(Magazzino.objects.get(pk=1)))
+				# print(materiale.get_giacenza_magazzino(Magazzino.objects.get(pk=1)))
+				# print(materiale.get_giacenza_magazzino(Magazzino.objects.get(pk=2)))
 
 				materiale.carico_materiale(quantita)
 
@@ -305,6 +309,7 @@ def genera_etichetta(request, pk):
 
 	barcode = code128.Code128(instance.codice, barHeight=10 * mm, barWidth=1.2)
 	barcode.drawOn(p, 10, 100)
+	p.drawString(20, 140, ("Codice materiale: " + instance.codice))
 
 	p.showPage()
 	p.save()
