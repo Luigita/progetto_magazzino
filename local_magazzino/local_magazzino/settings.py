@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
+import os
 from dotenv import load_dotenv
 import dj_database_url
 
@@ -32,7 +33,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-&psk#na5l=p3q8
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['luigita.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 
 	'catalog.apps.CatalogConfig',
+
+	'django_filters',
 
 ]
 
@@ -84,13 +87,8 @@ WSGI_APPLICATION = 'local_magazzino.wsgi.application'
 
 DATABASES = {
 	'default': {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "luigita$magazzino_mysql",
-        "USER": "luigita",
-        "PASSWORD": "Napoli@2021!",
-        "HOST": "luigita.mysql.pythonanywhere-services.com",
-# 		'ENGINE': 'django.db.backends.sqlite3',
-# 		'NAME': BASE_DIR / 'db.sqlite3',
+		'ENGINE': 'django.db.backends.sqlite3',
+		'NAME': BASE_DIR / 'db.sqlite3',
 	}
 }
 

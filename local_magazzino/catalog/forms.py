@@ -97,15 +97,6 @@ class ModificaMaterialeForm(forms.Form):
 		return data
 
 
-#
-# class CancellazioneMateriale(forms.Form):
-# 	materiale = forms.ModelChoiceField(queryset=Materiale.objects.all())
-#
-# 	def clean_materiale(self):
-# 		data = self.cleaned_data["materiale"]
-# 		return data
-
-
 class MovimentoForm(forms.Form):
 	# materiale = forms.ModelChoiceField(queryset=Materiale.objects.all())
 	materiale = forms.CharField(max_length=20)

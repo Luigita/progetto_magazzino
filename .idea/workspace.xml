@@ -5,16 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="23fb5fd9-509f-423c-a91f-dff029c1fe50" name="Changes" comment="aggiunta la possibilita di modificare un materiale, con il controllo sui campi del form di modifica">
+      <change afterPath="$PROJECT_DIR$/local_magazzino/local_magazzino/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local_magazzino/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local_magazzino/_db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/static/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/base_generic.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/base_generic.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/aggiungi_materiale.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/aggiungi_materiale.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/templates/catalog/materiale_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local_magazzino/catalog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/catalog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local_magazzino/local_magazzino/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/local_magazzino/local_magazzino/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,13 +38,24 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="filter_try" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOLdnbpc5teJJc&quot;,
+        &quot;number&quot;: 8
+      },
+      &quot;lastSeen&quot;: 1713883851577
+    }
+  ]
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
@@ -64,22 +81,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.manage.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;filter__try&quot;,
-    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ltanzillo/PycharmProjects/magazzino/local_magazzino&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.manage.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "git-widget-placeholder": "master",
+    "ignore_missing_gitignore": "true",
+    "last_opened_file_path": "C:/Users/ltanzillo/PycharmProjects/magazzino",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ltanzillo\PycharmProjects\magazzino" />
       <recent name="C:\Users\ltanzillo\PycharmProjects\magazzino\local_magazzino" />
       <recent name="C:\Users\ltanzillo\PycharmProjects\magazzino\local_magazzino\catalog\templates\catalog" />
     </key>
@@ -113,6 +131,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.manage" />
         <item itemvalue="Python.manage" />
         <item itemvalue="Python.manage" />
         <item itemvalue="Python.manage" />

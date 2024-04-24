@@ -1,3 +1,4 @@
+from django.contrib.auth import aget_user
 from django.http import HttpResponse, HttpResponseRedirect, FileResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -324,8 +325,7 @@ def trasferimento_magazzino(request):
 
 			if (materiale.giacenza - quantita) >= 0:
 				materiale.giacenza -= quantita
-				nuovo_scarico = Movimenti(materiale=materiale, quantita=-quantita,
-										  magazzino=Magazzino.objects.get(pk=1))
+				nuovo_scarico = Movimenti(materiale=materiale, quantita=-quantita, magazzino=Magazzino.objects.get(pk=1))
 				nuovo_scarico.save()
 				materiale.save()
 

@@ -26,7 +26,7 @@
               <li><a href="{% url 'movimenti' %}">Tutti i Movimenti</a></li>
               <li><a href="{% url 'magazzini' %}">Tutti i Magazzini</a></li>
                 <br>
-              {% if user.is_authenticated %}
+              {% if user.is_authenticated %}{{ user_permission }}
                  <li>Utente: {{ user.get_username }}</li>
 <!--               AGGIUNGERE TUTTE LE FUNZIONI CHE POTRA FARE L'UTENTE-->
                  <br>

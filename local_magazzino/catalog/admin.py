@@ -16,7 +16,7 @@ class MovimentiAdmin(admin.ModelAdmin):
 
 @admin.register(Magazzino)
 class MagazzinoAdmin(admin.ModelAdmin):
-	list_display = ("localita",)
+	list_display = ("localita","descrizione")
 
 
 @admin.register(MaterialeMagazzino)
